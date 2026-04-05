@@ -22,9 +22,15 @@ const ReservationForm: React.FC = () => {
     e.preventDefault();
     setError('');
 
+    const phoneDigits = form.phone.replace(/\D/g, '');
+    if (phoneDigits.length !== 11) {
+      setError('Введите 11 цифр номера телефона');
+      return;
+    }
+
     try {
-      await createReservation(form);
-      setLastReservation(form);
+      await createReservation({ ...form, phone: phoneDigits });
+      setLastReservation({ ...form, phone: phoneDigits });
       setShowModal(true);
       setForm({ name: '', phone: '', date: '', people: 2 });
     } catch (err: any) {
@@ -43,13 +49,15 @@ const ReservationForm: React.FC = () => {
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           required
         />
+        
         <input
           type="tel"
-          placeholder="Телефон"
+          placeholder="+7 999 999-99-99"
           value={form.phone}
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
           required
         />
+
         <input
           type="datetime-local"
           value={form.date}

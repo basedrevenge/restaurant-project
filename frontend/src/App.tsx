@@ -25,8 +25,7 @@ function App() {
   const smoothScroll = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-    window.scrollBy(0, -50); // маленькая поправка, чтобы не прилипало к самому верху
+    element.scrollIntoView();
   }
 };
   return (
@@ -44,9 +43,7 @@ function App() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .getElementById("menu")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  smoothScroll("menu");
                 }}
               >
                 ГЛАВНАЯ
@@ -66,9 +63,7 @@ function App() {
                 href="#"
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .getElementById("about")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  alert("Страница в разработке");
                 }}
               >
                 О НАС

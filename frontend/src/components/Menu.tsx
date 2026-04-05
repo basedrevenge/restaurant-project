@@ -45,7 +45,7 @@ const Menu: React.FC = () => {
   return (
     <div className="menu" id="menu">
       <div className="container">
-        <div className="menu-title">Наше меню</div>
+        <div className="menu-title">Наше <span>Меню</span></div>
         <div className="carousel-container">
           <button className="carousel-btn prev-btn" onClick={prevSlide}>‹</button>
           <div className="carousel-track-wrapper">
