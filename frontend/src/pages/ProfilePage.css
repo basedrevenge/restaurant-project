@@ -1,0 +1,752 @@
+/* ProfilePage.css */
+.profile-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding: 100px 0 60px;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Шапка профиля */
+.profile-header {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.profile-avatar {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #d67e35;
+}
+
+.avatar-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35px;
+  height: 35px;
+  background: #d67e35;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.avatar-overlay:hover {
+  transform: scale(1.1);
+}
+
+.avatar-overlay span {
+  color: white;
+  font-size: 18px;
+}
+
+.profile-info h1 {
+  font-size: 32px;
+  margin: 0 0 8px;
+  color: #333;
+  font-family: "Tinos", serif;
+}
+
+.profile-member {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.profile-loyalty {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.loyalty-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  color: white;
+}
+
+.loyalty-badge[data-tier="Золотой"] {
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  color: #333;
+}
+
+.loyalty-points {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.points-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #d67e35;
+}
+
+.points-label {
+  color: #666;
+  font-size: 14px;
+}
+
+.profile-actions {
+  margin-left: auto;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #d67e35;
+  color: #d67e35;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: #d67e35;
+  color: white;
+}
+
+/* Табы */
+.profile-tabs {
+  display: flex;
+  gap: 10px;
+  background: white;
+  padding: 10px;
+  border-radius: 60px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.tab-btn:hover {
+  background: #f5f5f5;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  color: white;
+  box-shadow: 0 4px 15px rgba(214, 126, 53, 0.3);
+}
+
+/* Бронирования */
+.bookings-list h2,
+.favorites-list h2,
+.settings-form h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: "Tinos", serif;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.booking-card:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.booking-date {
+  text-align: center;
+  min-width: 80px;
+}
+
+.booking-date .day {
+  font-size: 28px;
+  font-weight: 700;
+  color: #d67e35;
+  display: block;
+}
+
+.booking-date .month {
+  font-size: 14px;
+  color: #666;
+}
+
+.booking-details {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.booking-details div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #555;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.confirmed {
+  background: #4caf50;
+  color: white;
+}
+
+.status-badge.pending {
+  background: #ff9800;
+  color: white;
+}
+
+.booking-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.btn-icon:hover {
+  transform: scale(1.1);
+}
+
+.btn-new-booking {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.btn-new-booking:hover {
+  transform: translateY(-2px);
+}
+
+/* Избранное */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.favorite-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.favorite-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.favorite-info {
+  padding: 15px;
+}
+
+.favorite-info h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  color: #333;
+}
+
+.favorite-info p {
+  color: #d67e35;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.btn-order {
+  width: 100%;
+  padding: 10px;
+  background: #d67e35;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-order:hover {
+  background: #b5621a;
+}
+
+.favorite-remove {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favorite-remove:hover {
+  background: #ff4444;
+  transform: scale(1.1);
+}
+
+/* Настройки */
+.settings-form {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #d67e35;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-save {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+}
+
+.btn-password {
+  padding: 12px 30px;
+  background: transparent;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-password:hover {
+  border-color: #d67e35;
+  color: #d67e35;
+}
+
+/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ПРОФИЛЯ ========== */
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 20px 0 40px;
+  }
+
+  .profile-container {
+    padding: 0 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .profile-info h1 {
+    font-size: 22px;
+  }
+
+  .profile-loyalty {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .profile-actions {
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* Табы */
+  .profile-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .tab-btn {
+    flex: 1;
+    min-width: calc(50% - 8px);
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+
+  /* Бронирования */
+  .booking-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .booking-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .booking-date .day {
+    font-size: 24px;
+  }
+
+  .booking-details {
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .booking-actions {
+    justify-content: center;
+  }
+
+  .btn-new-booking {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  /* Избранное */
+  .favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .favorite-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+  }
+
+  .favorite-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+  }
+
+  .favorite-info {
+    flex: 1;
+    text-align: left;
+    padding: 0;
+  }
+
+  .favorite-info h3 {
+    font-size: 16px;
+  }
+
+  .favorite-info p {
+    font-size: 18px;
+  }
+
+  .favorite-remove {
+    position: static;
+  }
+
+  /* Настройки */
+  .settings-form {
+    padding: 20px;
+  }
+
+  .settings-form h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-save,
+  .btn-password {
+    width: 100%;
+  }
+
+  /* Информация профиля */
+  .profile-info-display {
+    gap: 10px;
+  }
+
+  .info-row {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .info-row strong {
+    width: 80px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 15px 0 30px;
+  }
+
+  .profile-header {
+    padding: 15px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+  }
+
+  .tab-btn {
+    font-size: 12px;
+    padding: 10px 6px;
+  }
+
+  .booking-card {
+    padding: 12px;
+  }
+
+  .booking-date .day {
+    font-size: 20px;
+  }
+
+  .booking-details div {
+    font-size: 12px;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .btn-new-booking {
+    font-size: 13px;
+    padding: 10px;
+  }
+}
+
+/* Кнопка выхода */
+.logout-btn {
+  border-color: #ff4444 !important;
+  color: #ff4444 !important;
+  margin-left: 10px;
+}
+
+.logout-btn:hover {
+  background: #ff4444 !important;
+  color: white !important;
+}
+
+/* Пустое сообщение */
+.empty-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background: #f9f9f9;
+  border-radius: 16px;
+}
+
+/* Загрузка */
+.profile-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 18px;
+  color: #d67e35;
+}
+
+/* Отображение информации профиля */
+.profile-info-display {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.info-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+}
+
+.info-row strong {
+  display: inline-block;
+  width: 100px;
+  color: #d67e35;
+}
+
+/* Модальное окно смены пароля */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.password-modal {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.password-modal h3 {
+  font-family: "Tinos", serif;
+  font-size: 24px;
+  color: #d67e35;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.password-error {
+  background: #fee;
+  color: #c33;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.password-success {
+  background: #e8f5e9;
+  color: #4caf50;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+}
+
+/* Фикс для скролла профиля */
+.profile-page {
+  min-height: 100vh;
+}

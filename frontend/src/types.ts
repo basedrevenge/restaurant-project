@@ -1,15 +1,16 @@
 export interface MenuItem {
   id: number;
-  title: string;
-  desc: string | null;
+  name: string;
   price: number;
+  description: string;
+  image: string;
+  category: string;
+  is_available: boolean;
 }
 
-export interface Reservation {
-  id?: number;
+export interface Category {
+  id: string;
   name: string;
-  phone: string;
-  date: string;
-  people: number;
-  status?: string;
+  image: string;
+  count: number;
 }

@@ -1,0 +1,688 @@
+/* ========== СТРАНИЦА "О НАС" ========== */
+
+.about-page {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* ========== HERO СЕКЦИЯ ========== */
+.about-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  background-image: url("/pictures/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: #2a2a2a;
+  display: flex;
+  align-items: center;
+}
+
+.about-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.about-hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  max-width: 600px;
+  padding-left: 10%;
+}
+
+/* Анимация ТОЛЬКО для текста (заголовок и цитата), картинка НЕ анимируется */
+.about-title {
+  font-family: "Tinos", serif;
+  font-size: 64px;
+  margin-bottom: 20px;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.6s ease forwards;
+}
+
+.about-title span {
+  color: #d67e35;
+}
+
+.about-quote {
+  font-size: 28px;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 500px;
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.6s ease 0.2s forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Картинка НЕ анимируется - она видна сразу */
+.about-hero {
+  animation: none;
+}
+
+/* ========== КАРУСЕЛЬ ========== */
+.about-carousel {
+  padding: 60px 0;
+  background: #f8f8f8;
+}
+
+.section-title {
+  font-family: "Tinos", serif;
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 50px;
+  color: #333;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.section-title span {
+  color: #d67e35;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.2s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.carousel-image {
+  width: 70%;
+  max-width: 800px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-image img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.carousel-arrow {
+  background: #d67e35;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 30px;
+  transition: all 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  background: #b5621a;
+  transform: scale(1.05);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.4s forwards;
+}
+
+.carousel-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-dots .dot.active {
+  background: #d67e35;
+  width: 25px;
+  border-radius: 10px;
+}
+
+/* ========== КОМАНДА ========== */
+.about-team {
+  padding: 60px 0;
+  background: white;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.team-card {
+  padding: 30px;
+  background: #f8f8f8;
+  border-radius: 20px;
+  transition: transform 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.team-card:nth-child(1) {
+  animation: fadeInUp 0.5s ease 0.1s forwards;
+}
+.team-card:nth-child(2) {
+  animation: fadeInUp 0.5s ease 0.3s forwards;
+}
+.team-card:nth-child(3) {
+  animation: fadeInUp 0.5s ease 0.5s forwards;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+}
+
+.team-icon {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.team-card h3 {
+  font-family: "Tinos", serif;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.team-card p {
+  color: #d67e35;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.team-card span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* ========== ОТЗЫВЫ ========== */
+.about-reviews {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f8f8f8 0%, #fff 100%);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.review-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.review-card:nth-child(1) {
+  animation: fadeInUp 0.5s ease 0.1s forwards;
+}
+.review-card:nth-child(2) {
+  animation: fadeInUp 0.5s ease 0.3s forwards;
+}
+.review-card:nth-child(3) {
+  animation: fadeInUp 0.5s ease 0.5s forwards;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.review-stars {
+  color: #ffc107;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.review-text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 15px;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.review-author {
+  font-weight: 600;
+  color: #d67e35;
+  font-size: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 5px;
+}
+
+.review-author span {
+  display: block;
+  font-size: 11px;
+  color: #999;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.reviews-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.6s forwards;
+}
+
+.btn-all-reviews,
+.btn-add-review {
+  padding: 12px 30px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-all-reviews {
+  background: transparent;
+  border: 2px solid #d67e35;
+  color: #d67e35;
+}
+
+.btn-all-reviews:hover {
+  background: #d67e35;
+  color: white;
+}
+
+.btn-add-review {
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  border: none;
+  color: white;
+}
+
+.btn-add-review:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(214, 126, 53, 0.4);
+}
+
+/* ========== КОНТАКТЫ ========== */
+.about-contacts {
+  padding: 60px 0;
+  background: #1a1a1a;
+  color: white;
+}
+
+.about-contacts .section-title {
+  color: white;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.contact-item {
+  font-size: 16px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.contact-item:nth-child(1) {
+  animation: fadeInUp 0.4s ease 0.1s forwards;
+}
+.contact-item:nth-child(2) {
+  animation: fadeInUp 0.4s ease 0.2s forwards;
+}
+.contact-item:nth-child(3) {
+  animation: fadeInUp 0.4s ease 0.3s forwards;
+}
+.contact-item:nth-child(4) {
+  animation: fadeInUp 0.4s ease 0.4s forwards;
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.review-modal {
+  background: white;
+  border-radius: 32px;
+  width: 450px;
+  max-width: calc(100% - 40px);
+  padding: 32px 28px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: #d67e35;
+  background: #f5f5f5;
+}
+
+.review-modal h3 {
+  font-family: "Tinos", serif;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 28px;
+  color: #333;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.review-modal h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #d67e35, #b5621a);
+  border-radius: 3px;
+}
+
+.review-modal .form-group {
+  margin-bottom: 22px;
+}
+
+.review-modal .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 14px;
+}
+
+.review-modal .form-group input,
+.review-modal .form-group select,
+.review-modal .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.review-modal .form-group input:focus,
+.review-modal .form-group select:focus,
+.review-modal .form-group textarea:focus {
+  outline: none;
+  border-color: #d67e35;
+  box-shadow: 0 0 0 3px rgba(214, 126, 53, 0.1);
+}
+
+.review-modal .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #d67e35, #b5621a);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(214, 126, 53, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== МОБИЛЬНАЯ АДАПТАЦИЯ ========== */
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  .contacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    height: 50vh;
+    min-height: 400px;
+  }
+  .about-title {
+    font-size: 42px;
+  }
+  .about-quote {
+    font-size: 18px;
+  }
+  .about-hero-content {
+    padding-left: 20px;
+  }
+  .about-carousel {
+    padding: 40px 0;
+  }
+  .section-title {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  .carousel-image {
+    width: 85%;
+  }
+  .carousel-image img {
+    height: 250px;
+  }
+  .carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+  }
+  .about-team {
+    padding: 40px 0;
+  }
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .team-card {
+    max-width: 300px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .team-icon {
+    font-size: 40px;
+  }
+  .team-card h3 {
+    font-size: 20px;
+  }
+  .about-reviews {
+    padding: 40px 0;
+  }
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .review-card {
+    max-width: 350px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .reviews-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .btn-all-reviews,
+  .btn-add-review {
+    width: 220px;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .about-contacts {
+    padding: 40px 0;
+  }
+  .contacts-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  .contact-item {
+    font-size: 14px;
+    padding: 12px;
+  }
+  .review-modal {
+    padding: 20px;
+    width: 85%;
+  }
+  .review-modal h3 {
+    font-size: 22px;
+  }
+  .submit-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    height: 45vh;
+    min-height: 350px;
+  }
+  .about-title {
+    font-size: 32px;
+  }
+  .about-quote {
+    font-size: 14px;
+  }
+  .section-title {
+    font-size: 26px;
+  }
+  .carousel-image img {
+    height: 200px;
+  }
+  .team-card {
+    padding: 20px;
+  }
+  .team-card h3 {
+    font-size: 18px;
+  }
+  .team-card p {
+    font-size: 14px;
+  }
+  .team-card span {
+    font-size: 12px;
+  }
+  .review-card {
+    padding: 15px;
+  }
+  .review-text {
+    font-size: 13px;
+  }
+  .review-author {
+    font-size: 12px;
+  }
+  .contact-item {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .btn-all-reviews,
+  .btn-add-review {
+    width: 200px;
+    font-size: 13px;
+  }
+  .review-modal h3 {
+    font-size: 20px;
+  }
+}

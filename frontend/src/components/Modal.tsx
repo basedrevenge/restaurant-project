@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,123 +8,102 @@ interface ModalProps {
     name: string;
     phone: string;
     date: string;
-    people: number;
+    time: string;
+    guests: number;
+    table_type: string;
   };
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, reservation }) => {
+  // Блокируем скролл body при открытом модальном окне
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+  const getTableTypeText = (type: string) => {
+    switch (type) {
+      case "VIP":
+        return "VIP зал";
+      case "TERRACE":
+        return "Терраса";
+      case "WINDOW":
+        return "У окна";
+      default:
+        return "Основной зал";
+    }
   };
 
-  return (
-    <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0,0,0,0.7)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        zIndex: 1000,
-      }}
-      onClick={onClose}
-    >
-      <div
-        style={{
-          backgroundColor: 'white',
-          borderRadius: '20px',
-          maxWidth: '450px',
-          width: '90%',
-          overflow: 'hidden',
-        }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div
-          style={{
-            background: 'linear-gradient(135deg, #d67e35 0%, #b5621a 100%)',
-            padding: '30px 20px 20px',
-            textAlign: 'center',
-          }}
-        >
-          <div style={{ fontSize: '70px' }}>✅</div>
-          <h3 style={{ color: 'white', margin: '10px 0 0' }}>Бронь успешно создана!</h3>
+  const modalContent = (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modern-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="modern-modal-close" onClick={onClose}>
+          ✕
+        </button>
+
+        <div className="modern-modal-icon">
+          <div className="checkmark">✓</div>
         </div>
 
-        <div style={{ padding: '30px' }}>
-          <p style={{ textAlign: 'center', color: '#666' }}>Спасибо, что выбрали наш ресторан. Мы ждём вас!</p>
+        <h3 className="modern-modal-title">Бронирование подтверждено!</h3>
 
-          <div
-            style={{
-              background: '#f9f9f9',
-              borderRadius: '12px',
-              padding: '15px',
-              margin: '20px 0',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #eee' }}>
-              <span style={{ fontWeight: 600, color: '#d67e35' }}>Имя:</span>
-              <span>{reservation.name}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #eee' }}>
-              <span style={{ fontWeight: 600, color: '#d67e35' }}>Телефон:</span>
-              <span>{reservation.phone}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid #eee' }}>
-              <span style={{ fontWeight: 600, color: '#d67e35' }}>Дата:</span>
-              <span>{formatDate(reservation.date)}</span>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0' }}>
-              <span style={{ fontWeight: 600, color: '#d67e35' }}>Гостей:</span>
-              <span>{reservation.people}</span>
-            </div>
+        <p className="modern-modal-greeting">
+          Уважаемый(ая) <strong>{reservation.name || "гость"}</strong>
+        </p>
+
+        <div className="modern-modal-details">
+          <div className="detail-row">
+            <span className="detail-icon">📅</span>
+            <span className="detail-label">Дата</span>
+            <span className="detail-value">{reservation.date}</span>
           </div>
-
-          <p style={{ fontSize: '14px', textAlign: 'center', color: '#d67e35' }}>Менеджер свяжется с вами для подтверждения</p>
+          <div className="detail-row">
+            <span className="detail-icon">⏰</span>
+            <span className="detail-label">Время</span>
+            <span className="detail-value">{reservation.time}</span>
+          </div>
+          <div className="detail-row">
+            <span className="detail-icon">👥</span>
+            <span className="detail-label">Гостей</span>
+            <span className="detail-value">{reservation.guests}</span>
+          </div>
+          <div className="detail-row">
+            <span className="detail-icon">📍</span>
+            <span className="detail-label">Столик</span>
+            <span className="detail-value">
+              {getTableTypeText(reservation.table_type)}
+            </span>
+          </div>
+          {reservation.phone && (
+            <div className="detail-row">
+              <span className="detail-icon">📞</span>
+              <span className="detail-label">Телефон</span>
+              <span className="detail-value">{reservation.phone}</span>
+            </div>
+          )}
         </div>
 
-        <div style={{ padding: '0 30px 30px', textAlign: 'center' }}>
-          <button
-            onClick={onClose}
-            style={{
-              background: 'linear-gradient(135deg, #d67e35 0%, #b5621a 100%)',
-              color: 'white',
-              border: 'none',
-              padding: '12px 30px',
-              fontSize: '16px',
-              borderRadius: '50px',
-              cursor: 'pointer',
-            }}
-          >
-            Отлично!
-          </button>
-        </div>
+        <p className="modern-modal-note">
+          Мы свяжемся с вами для подтверждения
+        </p>
+
+        <button className="modern-modal-btn" onClick={onClose}>
+          Отлично
+        </button>
       </div>
     </div>
   );
+
+  // Используем Portal для рендера в body, а не внутри ReservationForm
+  return ReactDOM.createPortal(modalContent, document.body);
 };
 
 export default Modal;

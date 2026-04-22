@@ -1,77 +1,153 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { getMenu } from '../api';
-import { MenuItem } from '../types';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getMenuItems } from "../api";
+import { MenuItem, Category } from "../types";
 
 const Menu: React.FC = () => {
-  const [items, setItems] = useState<MenuItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [categories, setCategories] = useState<Category[]>([
+    { id: "pizza", name: "Пиццы", image: "/pictures/pizza1.jpg", count: 0 },
+    { id: "soup", name: "Супы", image: "/pictures/soup.jpg", count: 0 },
+    {
+      id: "salad",
+      name: "Салаты",
+      image: "/pictures/salad.jpg",
+      count: 0,
+    },
+    {
+      id: "drinks",
+      name: "Напитки",
+      image: "/pictures/drinks.jpg",
+      count: 0,
+    },
+    {
+      id: "desserts",
+      name: "Десерты",
+      image: "/pictures//desserts.jpg",
+      count: 0,
+    },
+  ]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getMenu()
-      .then(setItems)
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    const updateItemsPerPage = () => {
-      const width = window.innerWidth;
-      if (width <= 600) setItemsPerPage(1);
-      else if (width <= 900) setItemsPerPage(2);
-      else if (width <= 1200) setItemsPerPage(3);
-      else setItemsPerPage(4);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
     };
-    updateItemsPerPage();
-    window.addEventListener('resize', updateItemsPerPage);
-    return () => window.removeEventListener('resize', updateItemsPerPage);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      const items = await getMenuItems();
+      const updatedCategories = categories.map((cat) => ({
+        ...cat,
+        count: items.filter((item: MenuItem) => item.category === cat.id)
+          .length,
+      }));
+      setCategories(updatedCategories);
+      setLoading(false);
+    };
+    fetchCounts();
+  }, []);
+
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const nextSlide = () => {
-    const maxIndex = Math.max(0, items.length - itemsPerPage);
-    setCurrentIndex(prev => Math.min(prev + itemsPerPage, maxIndex));
+    if (currentIndex < categories.length - 1 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex(currentIndex + 1);
+        setTimeout(() => setIsTransitioning(false), 50);
+      }, 150);
+    }
   };
 
   const prevSlide = () => {
-    setCurrentIndex(prev => Math.max(prev - itemsPerPage, 0));
+    if (currentIndex > 0 && !isTransitioning) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentIndex(currentIndex - 1);
+        setTimeout(() => setIsTransitioning(false), 50);
+      }, 150);
+    }
+  };
+
+  const handleCategoryClick = (categoryId: string) => {
+    navigate(`/category/${categoryId}`);
   };
 
   if (loading) return <div className="loading">Загрузка меню...</div>;
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
-  const currentPage = Math.floor(currentIndex / itemsPerPage);
-
   return (
     <div className="menu" id="menu">
       <div className="container">
-        <div className="menu-title">Наше <span>Меню</span></div>
-        <div className="carousel-container">
-          <button className="carousel-btn prev-btn" onClick={prevSlide}>‹</button>
-          <div className="carousel-track-wrapper">
-            <div className="carousel-track" ref={trackRef} style={{ transform: `translateX(-${currentIndex * (280 + 30)}px)`, display: 'flex', transition: 'transform 0.5s ease', gap: '30px' }}>
-              {items.map((item) => (
-                <div key={item.id} className="menu-item" style={{ flex: '0 0 250px', minWidth: '250px' }}>
-                  <div className="menu-image">
-                    <img src="/pictures/burger-i.jpg" className="menu-img" alt={item.title} />
-                    <div className="price-420">{item.price} ₽</div>
-                  </div>
-                  <div className="menu-text">{item.title}</div>
-                  <div className="menu-subtext">{item.desc || 'Вкусное блюдо'}</div>
-                  <div className="menu-button">
-                    <a href="#reservation" className="menu-btn">ЗАКАЗАТЬ</a>
-                  </div>
+        <div className="menu-title">
+          Наше <span>Меню</span>
+        </div>
+
+        {isMobile ? (
+          <div className="mobile-categories">
+            <button
+              className="mobile-carousel-btn prev"
+              onClick={prevSlide}
+              disabled={currentIndex === 0}
+            >
+              ‹
+            </button>
+            <div className="mobile-carousel-wrapper">
+              <div
+                className={`mobile-category-card ${isTransitioning ? "transitioning" : ""}`}
+                onClick={() => handleCategoryClick(categories[currentIndex].id)}
+              >
+                <div className="category-image">
+                  <img
+                    src={categories[currentIndex].image}
+                    alt={categories[currentIndex].name}
+                  />
                 </div>
-              ))}
+                <div className="category-title">
+                  {categories[currentIndex].name}
+                </div>
+                <div className="category-count">
+                  {categories[currentIndex].count} блюд
+                </div>
+                <div className="category-button">
+                  <span className="category-btn">ВЫБРАТЬ →</span>
+                </div>
+              </div>
             </div>
+            <button
+              className="mobile-carousel-btn next"
+              onClick={nextSlide}
+              disabled={currentIndex === categories.length - 1}
+            >
+              ›
+            </button>
           </div>
-          <button className="carousel-btn next-btn" onClick={nextSlide}>›</button>
-        </div>
-        <div className="carousel-dots">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <div key={i} className={`dot ${i === currentPage ? 'active' : ''}`} onClick={() => setCurrentIndex(i * itemsPerPage)}></div>
-          ))}
-        </div>
+        ) : (
+          <div className="categories-grid">
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className="category-card"
+                onClick={() => handleCategoryClick(category.id)}
+              >
+                <div className="category-image">
+                  <img src={category.image} alt={category.name} />
+                </div>
+                <div className="category-title">{category.name}</div>
+                <div className="category-count">{category.count} блюд</div>
+                <div className="category-button">
+                  <span className="category-btn">ВЫБРАТЬ →</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
